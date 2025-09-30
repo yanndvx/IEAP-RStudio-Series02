@@ -95,6 +95,35 @@ summary(prepost)
         Which graph illustrates the effect of the treatment?
 
         What sentence will you write in your thesis to explain your result?
+        
+*I believe the treatment has an effect on the performance. We will do some statistical tests in order to try to prove it. Assuming that we have paired data, we have :*
+```{r message=FALSE, warning=FALSE}
+before <- c(125, 130, 132, 135, 136, 138, 140, 145)
+after <- c(127, 132, 133, 136, 139, 141, 145, 148)
+
+shapiro.test(after - before)
+```
+*The Shapiro-Wilk normality test is used to determine if a dataset is normally distributed. Here, we have a p-value = 0.2828 (p>0.05), it shows that the differences between before and after are normally distributed. We can use a parametric t-test.*
+
+```{r}
+t.test(after, before, paired = TRUE)
+```
+*The t-test gives us some results : t-value (difference between the ratio of the means and variance, of the two groups [before and after]; if this ratio is low, there will be only few differences between both groups), df (degrees of freedom), p-value(tells the difference if the difference is statistically different [p<0.05] or not[p>0.05]), confidence interval (range of plausible values for the mean difference), and mean of differences (average change from before to after).*
+
+*Here, we have a p-value = 0.001008 (p<0.05), it shows that there the treatment has a highly significant impact on heart rate.*
+*The paired t-test shows a statistically significant improvement in performance after treatment. The average gain is 2.5 points, and the confidence interval confirms this effect is real and not due to chance or randomness*.
+
+*However, the lack of information about the aim of this rehabilitation can't confirm if the result is positive or not regarding the initial goal.*
+```{r}
+#display 
+library(ggplot2)
+ggplot(prepost, aes(x = time, y = perf)) +
+  geom_boxplot(fill = c("lightblue", "lightgreen")) +
+  labs(title = "Performance Before and After Rehabilitation",
+       x = "Time",
+       y = "Performance (bpm)") +
+  theme_minimal()
+```
 
 ## 1.3 Testing some stereotypes
 

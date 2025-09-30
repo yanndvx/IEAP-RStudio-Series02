@@ -222,7 +222,30 @@ ggplot(snore, aes(x = alcool, fill = snore)) +
 
 ```
 **Are men fatter?**
+*We will first check the normality of the distribution.*
+```{r}
+#splitting data 
+men_weight <- snore$weight[snore$sex == "H"]
+women_weight <- snore$weight[snore$sex == "F"]
 
+#distribution test
+shapiro.test(men_weight)
+shapiro.test(women_weight)
+```
+*Both groups don't follow a normal distribution (p-value < 0.05). We will use a non parametric test (Wilcoxon test).*
+```{r}
+#wilcoxon test 
+wilcox.test(men_weight, women_weight)
+```
+*The wilcoxon test gives a 0.729 Pvalue. It means that men are not clearly fatter than women. This is shown in the display underneath.*
+```{r}
+#display weight difference between men and women among snorers 
+boxplot(weight ~ sex, data = snore,
+        col = c("lightblue", "salmon"),
+        main = "Weight Comparison by Sex",
+        xlab = "Sex",
+        ylab = "Weight (kg)")
+```
 **Do women smoke less?**
 
 ## From a more general perspective:

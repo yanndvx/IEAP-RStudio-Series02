@@ -146,6 +146,33 @@ summary(snore)
 
 **Do the data confirm the following stereotypes?**
 **Are snorers fatter?**
+*We will check the normality distribution of the sample*
+```{r}
+#distribution test 
+snorers_weight <- snore$weight[snore$snore=="O"]
+non_snorers_weight <- snore$weight[snore$snore=="N"]
+
+shapiro.test(snorers_weight)
+shapiro.test(non_snorers_weight)
+```
+*P-value (0.0235 & 0.01955) is < 0.05 for both cases, we can conclude that the data are NOT "normally distributed". We will use a non parametric test (Wilcoxon test).* 
+```{r}
+#wilcoxon test
+wilcox.test(snorers_weight, non_snorers_weight)
+```
+*Here, Pvalue = 0.9079. As it is > than 0.05, there is no significant difference between the weight of snorers and non-snorers. The mean weight difference between snorers and non-snorers is only 0.19kg which is totally negligible.*
+
+*Here is a graphical representation of this relationship.* 
+```{r}
+#display
+boxplot(snorers_weight, non_snorers_weight, 
+        main = "Establishing correlations between weight and snore",
+        xlab = "Snoring (N = No, O = Yes)",
+        ylab = "Weight (kg)",
+        col = c("lightblue", "lightgreen"))
+```
+*The data boxplot and the t-test show us that there is no evident correlation between body weight and snoring (at least in the studied sample).*
+
 
 **Do snorers drink or smoke more?**
 

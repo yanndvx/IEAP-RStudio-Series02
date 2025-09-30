@@ -247,7 +247,22 @@ boxplot(weight ~ sex, data = snore,
         ylab = "Weight (kg)")
 ```
 **Do women smoke less?**
-
+*Because these are categorical variables, we will use chi^2 test.*
+```{r}
+table_sex_tabac <- table(snore$sex, snore$tabac)
+chisq.test(table_sex_tabac)
+```
+*The 0.00814 Pvalue depict a significant association, men and women don't smoke at similar rates.*
+```{r}
+#display men and women smoking comparison 
+barplot(table_sex_tabac,
+        beside = TRUE,
+        col = c("pink", "blue"),
+        legend = TRUE,
+        main = "Smoking Comparison by Sex",
+        xlab = "Smoking Status",
+        ylab = "Number of Individuals")
+```
 ## From a more general perspective:
 
 **Are there any correlations between variables?**

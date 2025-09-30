@@ -170,7 +170,13 @@ boxplot(snorers_weight, non_snorers_weight,
         xlab = "Snoring (N = No, O = Yes)",
         ylab = "Weight (kg)",
         col = c("lightblue", "lightgreen"))
+#add legend 
+legend("topright", legend = c("Non-Snorers", "Snorers"), fill = c("lightblue", "lightgreen"))
 ```
+
+
+
+
 *The data boxplot and the t-test show us that there is no evident correlation between body weight and snoring (at least in the studied sample).*
 
 **Do snorers drink or smoke more?**
@@ -221,6 +227,11 @@ ggplot(snore, aes(x = alcool, fill = snore)) +
   theme_minimal()
 
 ```
+
+
+
+
+
 **Are men fatter?**
 *We will first check the normality of the distribution.*
 ```{r}
@@ -246,6 +257,11 @@ boxplot(weight ~ sex, data = snore,
         xlab = "Sex",
         ylab = "Weight (kg)")
 ```
+
+
+
+
+
 **Do women smoke less?**
 *Because these are categorical variables, we will use chi^2 test.*
 ```{r}
@@ -263,6 +279,10 @@ barplot(table_sex_tabac,
         xlab = "Smoking Status",
         ylab = "Number of Individuals")
 ```
+
+
+
+
 ## From a more general perspective:
 
 **Are there any correlations between variables?**
@@ -285,10 +305,15 @@ corrplot(cor_matrix,
          diag = FALSE,
          type = "upper")
 ```
-*This "correlation matrix" allows us to read correlations between quantitative variables (age, height, weight, and alcool drinking). The bluer the bubble is, the more positive the correlation gets [+1], conversely : if the bubble is red, the correlation tend to negative [-1] (the 2 variables grow in the opposite direction). The intensity of the correlation can also be red by the size of the circle.*
+
+
+
+
+
+*This "correlation matrix" allows us to read correlations between quantitative variables (age, height, weight, and alcohol drinking). The bluer the bubble is, the more positive the correlation gets [+1], conversely : if the bubble is red, the correlation tend to negative [-1] (the 2 variables grow in the opposite direction). The intensity of the correlation can also be red by the size of the circle.*
   *- Comparing weight and height (0.926974428) : We observe a huge positive correlation, in most of the case, a tall person is heavier.*
-  *- The correlation between drinking alcool and weight (0.091501597) or height (0.10635025) are slightly positives, we can describe this as a "tendency", but these links still need to be proven.*
-  *- The last correlation made is between age and alcool (-0.1587432). We can conclude that older people tend to drink less alcool.*
+  *- The correlation between drinking alcohol and weight (0.091501597) or height (0.10635025) are slightly positives, we can describe this as a "tendency", but these links still need to be proven.*
+  *- The last correlation made is between age and alcohol (-0.1587432). We can conclude that older people tend to drink less alcohol.*
   
 
 

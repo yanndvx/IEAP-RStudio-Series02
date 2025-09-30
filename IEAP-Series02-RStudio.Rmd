@@ -173,9 +173,54 @@ boxplot(snorers_weight, non_snorers_weight,
 ```
 *The data boxplot and the t-test show us that there is no evident correlation between body weight and snoring (at least in the studied sample).*
 
-
 **Do snorers drink or smoke more?**
+*Smoking is a categorical variable (Yes or No, A or B, Male or Female...), we will directly do a chi^2 test.  *
+```{r}
+#test chi^2 tabac~snore
+table_snore_tabac <- table(snore$snore, snore$tabac)
+chisq.test(table_snore_tabac)
+```
+*Pvalue (0.4066) for tabac~snore indicate that there is no significant difference [>0.05] for the use of tobacco between snorers and non snorers.*
 
+*For alcool, we will first check the normality of the distribution.*
+```{r}
+#normality test alcool~snore
+alcool_snorers <- snore$alcool[snore$snore == "O"]
+alcool_non_snorers <- snore$alcool[snore$snore == "N"]
+shapiro.test(alcool_snorers)
+shapiro.test(alcool_non_snorers)
+```
+*The distribution is considered as "not-normal" [<0.05].*
+
+*We will proceed a Wilcoxon Test to analyse alcohol usage. It will tell us if there is a significant difference or not.*
+```{r}
+#wilcoxon test
+wilcox.test(alcool_snorers, alcool_non_snorers)
+```
+*The wilcoxon test gives a 0.00859 Pvalue, which is < 0.05. It means that there is a real difference between snorers and non-snorers when it comes to drinking alcohol.*
+
+*This can be seen in the following graph :*
+```{r}
+#display smokers (snorers in blue, non snorers in green)
+ggplot(snore, aes(x = tabac, fill = snore)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Smoking habits among snorers and non-snorers",
+       x = "Smoking Status",
+       y = "Count") +
+  scale_fill_manual(values = c("lightblue", "green"), labels = c("Non-Snorers", "Snorers")) +
+  theme_minimal()
+
+
+#display alcohol drinkers (snorers in blue, non snorers in orange)
+ggplot(snore, aes(x = alcool, fill = snore)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Alcohol consumption among snorers and non-snorers",
+       x = "Alcohol Consumption (units per week)",
+       y = "Count") +
+  scale_fill_manual(values = c("lightblue", "orange"), labels = c("Non-Snorers", "Snorers")) +
+  theme_minimal()
+
+```
 **Are men fatter?**
 
 **Do women smoke less?**

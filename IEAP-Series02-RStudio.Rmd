@@ -130,12 +130,6 @@ ggplot(prepost, aes(x = time, y = perf)) +
 **Humans have stereotypes, some of them are probably true, some others are probably false (e.g., ref ).**
 
 **Here, we will test stereotypes about snorers… among others.**
-```{r}
-snore <-read.csv("data/test_data/snore.txt", sep="\t")
-head(snore)
-str(snore)
-summary(snore)
-```
 
 ### 1.3.1 The data
 

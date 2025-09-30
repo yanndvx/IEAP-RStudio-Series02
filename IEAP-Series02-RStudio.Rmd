@@ -136,7 +136,12 @@ ggplot(prepost, aes(x = time, y = perf)) +
 **Download the file snore.txt**
 
 **This file contains anthropometric and qualitative measurements (1 person per line).**
-
+```{r}
+snore <-read.csv("data/test_data/snore.txt", sep="\t")
+head(snore)
+str(snore)
+summary(snore)
+```
 ### 1.3.2 The analysis
 
 **Do the data confirm the following stereotypes?**

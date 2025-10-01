@@ -22,5 +22,7 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE.
 
+# Working time 
 
+This project took me between 5 and 6 hours. 
 
